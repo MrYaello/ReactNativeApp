@@ -2,11 +2,14 @@ import { MenuIcon, Button, Icon, Avatar, AvatarFallbackText, AvatarImage, Text, 
     ActionsheetBackdrop, ActionsheetContent, ActionsheetItem, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, 
     ActionsheetItemText } from "@gluestack-ui/themed";
 import socket from "../assets/utils/socket";
+import QRCode from "qrcode";
+import { SvgXml } from 'react-native-svg';
 import { useState, useLayoutEffect } from "react";
-import { Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet, Image } from "react-native";
 
 const ChatMenu = ({username, setVisibleModalLogOut}) => {
-
+    const alias = "MrYaello";
+    username = "Yael Lozano Estrada"
     const [avatarSource, setAvatarSource] = useState();
     useLayoutEffect(() => {
         socket.emit("getAvatarSource", username);
@@ -18,6 +21,23 @@ const ChatMenu = ({username, setVisibleModalLogOut}) => {
         handleClose();
         setVisibleModalLogOut(true);
     }
+    let qr;
+
+    var opts = {
+        errorCorrectionLevel: 'H',
+        type: 'image/png',
+        quality: 1,
+        margin: 0.5,
+        color: {
+          dark:"#000",
+          light:"#FFF"
+        }
+      }
+      
+      QRCode.toString('text', opts, function (err, url) {
+        if (err) console.log(err);
+        qr = url;
+      });
         
     return (
         <Box>
@@ -26,25 +46,35 @@ const ChatMenu = ({username, setVisibleModalLogOut}) => {
             </Button>
             <Actionsheet isOpen={showActionsheet} onClose={handleClose} zIndex={900}>
                 <ActionsheetBackdrop/>
-                <ActionsheetContent h="$72" zIndex={999}>
+                <ActionsheetContent h="60%" zIndex={999}>
                     <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
                     </ActionsheetDragIndicatorWrapper>
-                    <ActionsheetItem onPress={handleLogOut}>
-                        <HStack alignItems="center" justifyContent="space-between" width="50%">
-                            <Avatar size="md">
+                    <ActionsheetItem>
+                        <VStack alignItems="center" justifyContent="space-between" width="100%">
+                            <Avatar size="2xl">
                                 <AvatarFallbackText>{username}</AvatarFallbackText>
                                 <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
                             </Avatar>
-                            <VStack ml="$1.5">
+                            <VStack mt="5%" alignItems="center">
                                 <Box>
-                                    <Text size="lg">{username}</Text>
+                                    <Text size="md">{alias}</Text>
+                                </Box>
+                                <Box>
+                                    <Text size="xl">{username}</Text>
                                 </Box>
                             </VStack>
-                        </HStack>
+                        </VStack>
                     </ActionsheetItem>
-                    <ActionsheetItem onPress={handleLogOut}>
-                        <ActionsheetItemText>Log out</ActionsheetItemText>
+                    <ActionsheetItem height="50%">
+                        <VStack alignItems="center" width="100%">
+                            <SvgXml
+                              width="100%"
+                              height="100%"
+                              xml={qr}
+                            />
+                            <Text>Access Code</Text>
+                        </VStack>
                     </ActionsheetItem>
                 </ActionsheetContent>
             </Actionsheet>
