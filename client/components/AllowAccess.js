@@ -5,9 +5,9 @@ import socket from "../assets/utils/socket";
 import QRCode from "qrcode";
 import { SvgXml } from 'react-native-svg';
 import { useState, useLayoutEffect } from "react";
-import { Platform, StyleSheet, Image } from "react-native";
+import { Platform, StyleSheet, Pressable } from "react-native";
 
-const ChatMenu = ({username, setVisibleModalLogOut}) => {
+const AllowAccess = ({username, setVisibleModalLogOut}) => {
     const alias = "MrYaello";
     username = "Yael Lozano Estrada"
     const [avatarSource, setAvatarSource] = useState();
@@ -34,19 +34,22 @@ const ChatMenu = ({username, setVisibleModalLogOut}) => {
         }
       }
       
-      QRCode.toString('text', opts, function (err, url) {
+      QRCode.toString('El Luk es bien puto y no puede pasar por puto', opts, function (err, url) {
         if (err) console.log(err);
         qr = url;
       });
         
     return (
         <Box>
-            <Button onPress={handleClose} style={styles.menu} size="md">
-                <Icon size="xl" as={MenuIcon}></Icon>
-            </Button>
+            <Pressable onPress={handleClose} style={styles.menu} size="md">
+                <Avatar size="lg">
+                    <AvatarFallbackText>{username}</AvatarFallbackText>
+                    <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
+                </Avatar>
+            </Pressable>
             <Actionsheet isOpen={showActionsheet} onClose={handleClose} zIndex={900}>
                 <ActionsheetBackdrop/>
-                <ActionsheetContent h="60%" zIndex={999}>
+                <ActionsheetContent h="63%" zIndex={999}>
                     <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
                     </ActionsheetDragIndicatorWrapper>
@@ -66,16 +69,14 @@ const ChatMenu = ({username, setVisibleModalLogOut}) => {
                             </VStack>
                         </VStack>
                     </ActionsheetItem>
-                    <ActionsheetItem height="50%">
-                        <VStack alignItems="center" width="100%">
-                            <SvgXml
-                              width="100%"
-                              height="100%"
-                              xml={qr}
-                            />
-                            <Text>Access Code</Text>
-                        </VStack>
-                    </ActionsheetItem>
+                    <VStack alignItems="center" width="100%" height="47%" mt="3%">
+                        <SvgXml
+                            width="100%"
+                            height="100%"
+                            xml={qr}
+                        />
+                        <Text>Access Code</Text>
+                    </VStack>
                 </ActionsheetContent>
             </Actionsheet>
         </Box>
@@ -91,4 +92,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ChatMenu;
+export default AllowAccess;

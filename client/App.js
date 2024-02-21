@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 
 import Login from "./screens/Login";
-import Messaging from "./screens/Messaging";
+import Scanner from "./screens/Scanner";
 import Chat from "./screens/Chat";
 import Register from './screens/Register';
 import Welcome from './screens/Welcome';
@@ -10,7 +10,6 @@ import { config } from './config/gluestack-ui.config';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GluestackUIProvider } from '@gluestack-ui/themed';
-
 import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
@@ -55,8 +54,8 @@ export default function App() {
             />
 
             <Stack.Screen
-              name='Messaging'
-              component={Messaging}
+              name='Scanner'
+              component={Scanner}
               options={{
                 headerShown: false
               }}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from "react";
 import { SafeAreaView, Platform, Pressable } from "react-native";
 import styles from "../assets/utils/styles.js";
 import ModalGroup from "../components/ModalGroup.js";
-import ChatMenu from "../components/ChatMenu.js";
+import Profile from "../components/Profile.js";
 import ModalLogOut from "../components/ModalLogOut.js";
 import { 
   Box,
@@ -69,7 +69,7 @@ const Chat = ({ navigation }) => {
           <Heading style={Platform.OS === "ios" ? {marginTop: 10, paddingBottom:30} : {marginTop: 15}}>
             {username}
           </Heading>
-          <ChatMenu username={username} setVisibleModalLogOut={setVisibleModalLogOut} />
+          <Profile username={username} setVisibleModalLogOut={setVisibleModalLogOut} />
         </HStack>
       </Box>
       <Box
@@ -120,7 +120,7 @@ const Chat = ({ navigation }) => {
           )}
         <Fab 
           bg="$primary600" size="lg" 
-          onPress={() => {setVisible(true)}}
+          onPress={() => {navigation.navigate("Scanner")}}
           style={Platform.OS === "ios" && {marginBottom: 30}}
           >
           <FabIcon as={EditIcon} /> 
