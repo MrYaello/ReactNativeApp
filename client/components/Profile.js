@@ -8,8 +8,8 @@ import { useState, useLayoutEffect } from "react";
 import { Platform, StyleSheet, Pressable } from "react-native";
 
 const Profile = ({username, setVisibleModalLogOut}) => {
-    const alias = "MrYaello";
-    username = "Yael Lozano Estrada"
+    const alias = "Luke13";
+    username = "Luke Morales Flores"
     const [avatarSource, setAvatarSource] = useState();
     useLayoutEffect(() => {
         socket.emit("getAvatarSource", username);
