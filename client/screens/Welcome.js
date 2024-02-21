@@ -54,7 +54,8 @@ const Welcome = ({ navigation }) => {
           source={require('../assets/logo512.png')}
         />
         <Box width="100%" alignItems="center" justifyContent="flex-end" height="92%" style={{position: "absolute"}}>
-        <Button width="80%" justifyContent="space-between" onPress={goToLogin}>
+          {/**<Button width="80%" justifyContent="space-between" onPress={goToLogin}>*/}
+        <Button width="80%" justifyContent="space-between" onPress={() => {navigation.navigate("Chat")}}>
           <ButtonText>Sign in</ButtonText>
           <ButtonIcon as={ArrowRightIcon}/>
         </Button>
