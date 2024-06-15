@@ -40,10 +40,10 @@ const Profile = ({username, setVisibleModalLogOut}) => {
         }
       }
       
-      QRCode.toString('IMJOTO', opts, function (err, url) {
-        if (err) console.log(err);
-        qr = url;
-      });
+    QRCode.toString('IMJOTO', opts, function (err, url) {
+    if (err) console.log(err);
+    qr = url;
+    });
         
     return (
         <Box>

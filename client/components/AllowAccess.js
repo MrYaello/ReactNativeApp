@@ -40,7 +40,7 @@ const AllowAccess = ({code, showAllowAcess, setShowAllowAcess}) => {
         <Box>
             <Actionsheet isOpen={isOpen} onClose={handleClose} zIndex={900}>
                 <ActionsheetBackdrop/>
-                <ActionsheetContent h="50%" zIndex={999}>
+                <ActionsheetContent maxHeight="60%" zIndex={999}>
                     <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
                     </ActionsheetDragIndicatorWrapper>

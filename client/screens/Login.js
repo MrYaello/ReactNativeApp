@@ -59,7 +59,7 @@ const Login = ({ navigation }) => {
             } else {
               store("username", auth[0].username);
               store("id", String(auth[0].index));
-              navigation.navigate("Main");
+              navigation.replace("Main");
             }
           });
         }
@@ -87,7 +87,7 @@ const Login = ({ navigation }) => {
         source={require('../assets/textlogo512.png')}
         style={{
           height: 50,
-          width: 100
+          width: 330
         }}
         />
       </Box>

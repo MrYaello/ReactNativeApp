@@ -307,7 +307,7 @@ const Register = ({ navigation }) => {
         source={require('../assets/textlogo512.png')}
         style={{
           height: 50,
-          width: 100
+          width: 330
         }}
         />
       </Box>

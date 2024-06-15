@@ -21,41 +21,34 @@ import {
     RepeatIcon,
     Icon,
     LockIcon} from "@gluestack-ui/themed";
-import { Camera } from "expo-camera";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import * as LucideIcons from "lucide-react-native";
 import AllowAcess from "../components/AllowAccess.js";
 
 export default function App() {
-    const [hasPermission, setHasPermission] = useState(null);
+    const [permission, requestPermission] = useCameraPermissions();
+    const [facing, setFacing] = useState("back");
     const [scanned, setScanned] = useState(false);
     const [dataReaded, setDataReaded] = useState("");
 
-    const getPermission = () => {
-        (async () => {
-            setScanned(false);
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
+    function toggleCameraFacing() {
+        setFacing(current => (current === "back" ? "front" : "back"));
     }
-
-    useEffect(() => {
-        getPermission();
-    }, []);
 
     const handleBarCodeScanned = ({ data }) => {
         setScanned(true);
         setDataReaded(data);
     };
 
-    if (hasPermission === null) {
+    if (!permission) {
         return <Text>Requesting for camera permission</Text>;
     }
     
-    if (hasPermission === false) {
+    if (!permission.granted) {
         return (
         <Box style={styles.container}>
             <Text style={{ margin: 10 }}>No access to camera</Text>
-            <Button onPress={() => getPermission()}>
+            <Button onPress={requestPermission}>
                 <ButtonText>Allow Camera</ButtonText>
                 <ButtonIcon ml="$2" as={LucideIcons.Camera}/>
             </Button>
@@ -69,10 +62,17 @@ export default function App() {
                     zindex: 2,
                 }}/>
             <Box style={styles.barCodeBox}>    
-                <Camera
-                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={{height: 400, width: 400}}
-                />
+                <CameraView
+                    facing={facing}
+                    onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    barcodeScannerSettings={{
+                        barCodeTypes: [
+                            "qr",
+                        ],
+                    }}
+                    style={{height: 400, width: 400}}
+                >
+                </CameraView>
             </Box>
             {/*<Box height="10%" pt="10%">
                 {scanned && (<Button onPress={() => setScanned(false)}>

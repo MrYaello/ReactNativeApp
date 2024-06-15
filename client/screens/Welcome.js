@@ -17,11 +17,11 @@ const Welcome = ({ navigation }) => {
   const [username, setUsername] = useState("");
 
   const goToLogin = () => {
-    navigation.navigate("Login");
+    navigation.replace("Login");
   }
 
   const goToRegister = () => {
-    navigation.navigate("Register");
+    navigation.replace("Register");
   }
   
   const getUsername = async () => {
@@ -56,7 +56,7 @@ const Welcome = ({ navigation }) => {
         />
         <Box width="100%" alignItems="center" justifyContent="flex-end" height="92%" style={{position: "absolute"}}>
           {/**<Button width="80%" justifyContent="space-between" onPress={goToLogin}>*/}
-        <Button width="80%" justifyContent="space-between" onPress={() => {navigation.navigate("Main")}}>
+        <Button width="80%" justifyContent="space-between" onPress={goToLogin}>
           <ButtonText>Sign in</ButtonText>
           <ButtonIcon as={ArrowRightIcon}/>
         </Button>
