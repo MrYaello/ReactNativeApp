@@ -28,7 +28,7 @@ const ModalVerification = ({setVisible, email, setEmailVerified}) => {
     else {
       socket.emit("verifyEmailCode", email);
       socket.off("verifyEmailCode").on("verifyEmailCode", (result) => {
-        if (result == value) {
+        if (result[0].code == value) {
           setEmailVerified(true);
           setVisible(false);
         } 
@@ -105,7 +105,7 @@ return (
         setVisible(false)
       }}
     >
-      <ButtonText>Go Back</ButtonText>
+      <ButtonText>Resend</ButtonText>
     </Button>
     <Button
       size="sm"
@@ -142,7 +142,7 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
   focusCell: {
-    borderBottomColor: '#4f46e5',
+    borderBottomColor: '#ec346a',
     borderBottomWidth: 2,
   },
   error: {
