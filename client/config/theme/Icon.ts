@@ -63,6 +63,14 @@ export const BaseIcon = createStyle({
           size: 30,
         },
       },
+      '10xl': {
+        h: '$64',
+        w: '$64',
+        props: {
+          //@ts-ignore
+          size: 260,
+        },
+      },
     },
   },
   // defaultProps: {

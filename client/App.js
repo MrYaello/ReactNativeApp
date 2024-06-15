@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useState } from 'react';
 
 import Login from "./screens/Login";
 import Scanner from "./screens/Scanner";
-import Chat from "./screens/Chat";
+import Main from "./screens/Main";
 import Register from './screens/Register';
 import Welcome from './screens/Welcome';
 
@@ -45,10 +45,10 @@ export default function App() {
             />
           
             <Stack.Screen
-              name='Chat'
-              component={Chat}
+              name='Main'
+              component={Main}
               options={{
-                title: "Chats",
+                title: "Main",
                 headerShown: false
               }}
             />

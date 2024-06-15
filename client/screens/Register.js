@@ -21,7 +21,8 @@ import {
   EyeOffIcon,
   Icon,
   LockIcon} from "@gluestack-ui/themed";
-import { SafeAreaView, Image, Keyboard } from "react-native";
+import { Image, Keyboard } from "react-native";
+import SafeAreaView from 'react-native-safe-area-view';
 import socket from "../assets/utils/socket.js";
 import ModalVerification from "../components/ModalVerification.js";
 import sha256 from "sha256";
@@ -33,12 +34,12 @@ const Register = ({ navigation }) => {
   const [phonenumber, setPhonenumber] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(true);
   const [messagePassword, setMessagePassword] = useState("");
   const [messageUsername, setMessageUsername] = useState("");
   const [messageEmail, setMessageEmail] = useState("");
   const [messagePhonenumber, setMessagePhonenumber] = useState("");
-  const cooldown = 60 * 0.5;
+  const cooldown = 60 * 1;
   const [time, setTime] = useState(cooldown);
   const [isActive, setIsActive] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +51,7 @@ const Register = ({ navigation }) => {
       buttonCooldown = `${Math.floor(time / 60).toString().padStart(2, "0")}:${(time % 60).toString().padStart(2, "0")}`;
       interval = setInterval(() => {
         setTime(time - 1);
-      }, 10);
+      }, 1000);
     } else {
       buttonCooldown = "Verify";
       clearInterval(interval);
@@ -141,6 +142,7 @@ const Register = ({ navigation }) => {
             <InputField 
               autoCorrect={false}
               autoCapitalize="none"
+              size="sm"
               type="text" 
               defaultValue=""
               placeholder="Where could we email you?"
@@ -152,7 +154,9 @@ const Register = ({ navigation }) => {
           </Input>
           
           {!emailVerified ? <Button width="27%" ml="1%" flexDirection="row" justifyContent="center" onPress={verifyEmail} isDisabled={isActive}>
-            <ButtonText>{buttonCooldown}</ButtonText>
+            <ButtonText style={{
+              fontSize: 14,
+            }}>{buttonCooldown}</ButtonText>
             <ButtonIcon ml="$2" as={CheckIcon}/>
           </Button> : "" }
           </Box>
@@ -181,6 +185,7 @@ const Register = ({ navigation }) => {
               type="text" 
               defaultValue="" 
               placeholder="Where should we call you?"
+              size="sm"
               onChangeText={(value) => {
                 setPhonenumber(value.trim());
                 setMessagePhonenumber("");
@@ -210,6 +215,7 @@ const Register = ({ navigation }) => {
               type="text" 
               defaultValue="" 
               placeholder="Choose your alter ego"
+              size="sm"
               onChangeText={(value) => {
                 setUsername(value.trim());
                 setMessageUsername("");
@@ -239,6 +245,7 @@ const Register = ({ navigation }) => {
                 autoCapitalize="none" 
                 type={showPassword ? "input" : "password"} 
                 defaultValue="" 
+                size="sm"
                 placeholder="Forge the key to your digital realm"
                 onChangeText={(value) => {
                   setPassword(value.trim());
@@ -247,8 +254,14 @@ const Register = ({ navigation }) => {
               />
             </Input>
             <Button variant="outline" width="14%" justifyContent="center" flexDirection="row" onPress={() => {setShowPassword(!showPassword)}} isDisabled={!emailVerified}>
-              <ButtonIcon ml="0" as={EyeOffIcon}/>
+              {showPassword ? (
+                <ButtonIcon ml="0" as={EyeIcon}/>
+              ) : (
+                <Icon ml="0" as={EyeOffIcon} color="$primary600"/>            
+              )}
             </Button>
+            
+            
           </Box>
           
           <FormControlError>

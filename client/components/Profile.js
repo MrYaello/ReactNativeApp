@@ -1,19 +1,25 @@
 import { MenuIcon, Button, Icon, Avatar, AvatarFallbackText, AvatarImage, Text, HStack, VStack, Box, Actionsheet, 
     ActionsheetBackdrop, ActionsheetContent, ActionsheetItem, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, 
-    ActionsheetItemText } from "@gluestack-ui/themed";
+    ActionsheetItemText , Accordion, AccordionHeader, ActionsheetIcon, AccordionItem, AccordionTrigger, AccordionContent, AccordionContentText,
+    AddIcon, RemoveIcon, AccordionIcon, ChevronDownIcon, ChevronUpIcon} from "@gluestack-ui/themed";
 import socket from "../assets/utils/socket";
 import QRCode from "qrcode";
+import { ImageIcon, KeyRoundIcon } from 'lucide-react-native';
 import { SvgXml } from 'react-native-svg';
 import { useState, useLayoutEffect } from "react";
 import { Platform, StyleSheet, Pressable } from "react-native";
 
 const Profile = ({username, setVisibleModalLogOut}) => {
-    const alias = "Luke13";
-    username = "Luke Morales Flores"
+    const alias = "MrYaello";
+    username = "Yael Lozano Estrada"
     const [avatarSource, setAvatarSource] = useState();
+    const [isExpanded, setIsExpanded] = useState(false);
     useLayoutEffect(() => {
         socket.emit("getAvatarSource", username);
-        socket.on("getAvatarSource", (response) => setAvatarSource(response));
+        socket.on("getAvatarSource", (response) => {
+            if (response.length != 0)
+                setAvatarSource(response[0].avatar);
+        });
     }, [username]);
     const [showActionsheet, setShowActionsheet] = useState(false)
     const handleClose = () => setShowActionsheet(!showActionsheet)
@@ -34,7 +40,7 @@ const Profile = ({username, setVisibleModalLogOut}) => {
         }
       }
       
-      QRCode.toString('El Luk es bien puto y no puede pasar por puto', opts, function (err, url) {
+      QRCode.toString('IMJOTO', opts, function (err, url) {
         if (err) console.log(err);
         qr = url;
       });
@@ -53,22 +59,79 @@ const Profile = ({username, setVisibleModalLogOut}) => {
                     <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
                     </ActionsheetDragIndicatorWrapper>
-                    <ActionsheetItem>
-                        <VStack alignItems="center" justifyContent="space-between" width="100%">
-                            <Avatar size="2xl">
-                                <AvatarFallbackText>{username}</AvatarFallbackText>
-                                <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
-                            </Avatar>
-                            <VStack mt="5%" alignItems="center">
-                                <Box>
-                                    <Text size="md">{alias}</Text>
-                                </Box>
-                                <Box>
-                                    <Text size="xl">{username}</Text>
-                                </Box>
-                            </VStack>
-                        </VStack>
-                    </ActionsheetItem>
+                    <Accordion
+                        m="$5"
+                        width="100%"
+                        size="md"
+                        variant="unfilled"
+                        type="single"
+                        isCollapsible={true}
+                        isDisabled={false}>
+                        <AccordionItem value="profile">
+                            <AccordionHeader>
+                                <AccordionTrigger alignItems="center" width="100%">
+                                    {({ isExpanded }) => {
+                                        return (
+                                            <>
+                                            <HStack alignItems="center" justifyContent="space-between" width="100%" >
+                                                <Avatar size="xl">
+                                                    <AvatarFallbackText>{username}</AvatarFallbackText>
+                                                    <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
+                                                </Avatar>
+                                                <VStack alignItems="center" ml="$3">
+                                                <Box>
+                                                    <Text size="md">{alias}</Text>
+                                                </Box>
+                                                <Box>
+                                                    <Text size="xl">{username}</Text>
+                                                </Box>
+                                                </VStack>
+                                                {isExpanded ? (
+                                                    <Icon as={ChevronUpIcon} size="xl" ml="$4" color="$primary600"/>
+                                                ) : (
+                                                    <AccordionIcon as={ChevronDownIcon} size="xl" ml="$4" color="$primary600"/>   
+                                                )}
+                                            </HStack>
+                                            </>
+                                        )
+                                    }}
+                                    
+                                    {/*
+                                    <VStack alignItems="center" justifyContent="space-between">
+                                        <Avatar size="2xl">
+                                            <AvatarFallbackText>{username}</AvatarFallbackText>
+                                            <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
+                                        </Avatar>
+                                        <VStack mt="5%" alignItems="center">
+                                            <Box>
+                                                <Text size="md">{alias}</Text>
+                                            </Box>
+                                            <Box>
+                                                <Text size="xl">{username}</Text>
+                                            </Box>
+                                        </VStack>
+                                    </VStack>
+                                    */}
+                                </AccordionTrigger>
+                            </AccordionHeader>
+                            <AccordionContent height="70%">
+                                <ActionsheetItem justifyContent="space-between">
+                                    <VStack>
+                                        <Text size="md">Account</Text>
+                                        <Text color="$light400" size="sm">Change username, password, email.</Text>
+                                    </VStack>
+                                    <ActionsheetIcon size="xl"><Icon as={KeyRoundIcon} size="xl" color="$primary600"/></ActionsheetIcon>
+                                </ActionsheetItem>
+                                <ActionsheetItem justifyContent="space-between">
+                                    <VStack>
+                                        <Text size="md">Avatar</Text>
+                                        <Text color="$light400" size="sm">Change profile picture.</Text>
+                                    </VStack>
+                                    <ActionsheetIcon size="xl"><Icon as={ImageIcon} size="xl" color="$primary600"/></ActionsheetIcon>
+                                </ActionsheetItem>
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                     <VStack alignItems="center" width="100%" height="47%" mt="3%">
                         <SvgXml
                             width="100%"

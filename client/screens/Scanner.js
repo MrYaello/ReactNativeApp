@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import { 
     FormControl,
     Box,
@@ -22,10 +23,12 @@ import {
     LockIcon} from "@gluestack-ui/themed";
 import { Camera } from "expo-camera";
 import * as LucideIcons from "lucide-react-native";
+import AllowAcess from "../components/AllowAccess.js";
 
 export default function App() {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const [dataReaded, setDataReaded] = useState("");
 
     const getPermission = () => {
         (async () => {
@@ -41,7 +44,7 @@ export default function App() {
 
     const handleBarCodeScanned = ({ data }) => {
         setScanned(true);
-        alert(`${data}`);
+        setDataReaded(data);
     };
 
     if (hasPermission === null) {
@@ -61,18 +64,23 @@ export default function App() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Icon size="10xl" opacity="$30" color="$primary600" as={LucideIcons.Scan} style={{
+                    position: 'absolute',
+                    zindex: 2,
+                }}/>
             <Box style={styles.barCodeBox}>    
                 <Camera
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={{height: 400, width: 400}}
                 />
             </Box>
-            <Box height="10%" pt="10%">
+            {/*<Box height="10%" pt="10%">
                 {scanned && (<Button onPress={() => setScanned(false)}>
                     <ButtonIcon mr="$2" as={RepeatIcon} />
                     <ButtonText>Scan Again</ButtonText>
                 </Button>)}
-            </Box>
+    <       /Box>*/}
+            <AllowAcess code={dataReaded} showAllowAcess={scanned} setShowAllowAcess={setScanned}></AllowAcess>
         </SafeAreaView>
     );
 }
@@ -91,5 +99,6 @@ const styles = StyleSheet.create({
     width: 350,
     overflow: "hidden",
     borderRadius: 30,
+    zIndex: -1,
   }
 });

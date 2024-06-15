@@ -8,7 +8,8 @@ import {
   ArrowRightIcon,
   Box
   } from "@gluestack-ui/themed";
-import { Pressable, SafeAreaView } from "react-native";
+import { Pressable } from "react-native";
+import SafeAreaView from 'react-native-safe-area-view';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import socket from "../assets/utils/socket.js";
 
@@ -28,7 +29,7 @@ const Welcome = ({ navigation }) => {
       const value = await AsyncStorage.getItem("username");
       if (value !== null) {
         setUsername(value);
-        navigation.replace("Chat");
+        navigation.replace("Main");
       }
     } catch (e) {
       console.error(e);
@@ -55,7 +56,7 @@ const Welcome = ({ navigation }) => {
         />
         <Box width="100%" alignItems="center" justifyContent="flex-end" height="92%" style={{position: "absolute"}}>
           {/**<Button width="80%" justifyContent="space-between" onPress={goToLogin}>*/}
-        <Button width="80%" justifyContent="space-between" onPress={() => {navigation.navigate("Chat")}}>
+        <Button width="80%" justifyContent="space-between" onPress={() => {navigation.navigate("Main")}}>
           <ButtonText>Sign in</ButtonText>
           <ButtonIcon as={ArrowRightIcon}/>
         </Button>

@@ -17,8 +17,11 @@ import {
   ButtonIcon, 
   Text,
   EyeOffIcon,
+  EyeIcon,
+  Icon,
   LockIcon} from "@gluestack-ui/themed";
-import { SafeAreaView, Image } from "react-native";
+import { Image } from "react-native";
+import SafeAreaView from 'react-native-safe-area-view';
 import socket from "../assets/utils/socket.js";
 import styles from "../assets/utils/styles.js";
 import sha256 from "sha256";
@@ -56,7 +59,7 @@ const Login = ({ navigation }) => {
             } else {
               store("username", auth[0].username);
               store("id", String(auth[0].index));
-              navigation.navigate("Chat");
+              navigation.navigate("Main");
             }
           });
         }
@@ -150,7 +153,11 @@ const Login = ({ navigation }) => {
               />
             </Input>
             <Button variant="outline" width="14%" justifyContent="center" flexDirection="row" onPress={() => {setShowPassword(!showPassword)}}>
-              <ButtonIcon ml="0" as={EyeOffIcon}/>
+              {showPassword ? (
+                <ButtonIcon ml="0" as={EyeIcon}/>
+              ) : (
+                <Icon ml="0" as={EyeOffIcon} color="$primary600"/>            
+              )}
             </Button>
           </Box>
           

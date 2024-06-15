@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { SafeAreaView, Platform, Pressable } from "react-native";
+import { Platform, Pressable } from "react-native";
+import SafeAreaView from 'react-native-safe-area-view';
 import styles from "../assets/utils/styles.js";
 import ModalGroup from "../components/ModalGroup.js";
 import Profile from "../components/Profile.js";
@@ -21,7 +22,7 @@ import {
 import socket from "../assets/utils/socket.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Chat = ({ navigation }) => {
+const Main = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [visible, setVisible] = useState(false);
@@ -132,5 +133,5 @@ const Chat = ({ navigation }) => {
   )
 } 
 
-export default Chat;
+export default Main;
 
