@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Platform, Pressable } from "react-native";
-import SafeAreaView from 'react-native-safe-area-view';
+import { Platform, Pressable, SafeAreaView } from "react-native";
 import styles from "../assets/utils/styles.js";
 import ModalGroup from "../components/ModalGroup.js";
 import Profile from "../components/Profile.js";

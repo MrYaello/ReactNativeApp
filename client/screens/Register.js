@@ -21,8 +21,7 @@ import {
   EyeOffIcon,
   Icon,
   LockIcon} from "@gluestack-ui/themed";
-import { Image, Keyboard } from "react-native";
-import SafeAreaView from 'react-native-safe-area-view';
+import { Image, Keyboard, SafeAreaView } from "react-native";
 import socket from "../assets/utils/socket.js";
 import ModalVerification from "../components/ModalVerification.js";
 import sha256 from "sha256";

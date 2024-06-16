@@ -8,8 +8,7 @@ import {
   ArrowRightIcon,
   Box
   } from "@gluestack-ui/themed";
-import { Pressable } from "react-native";
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import socket from "../assets/utils/socket.js";
 

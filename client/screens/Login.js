@@ -20,8 +20,7 @@ import {
   EyeIcon,
   Icon,
   LockIcon} from "@gluestack-ui/themed";
-import { Image } from "react-native";
-import SafeAreaView from 'react-native-safe-area-view';
+import { Image, SafeAreaView } from "react-native";
 import socket from "../assets/utils/socket.js";
 import styles from "../assets/utils/styles.js";
 import sha256 from "sha256";

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { 
     FormControl,
     Box,
