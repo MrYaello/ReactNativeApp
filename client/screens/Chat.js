@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Platform, Pressable, SafeAreaView, Image, StyleSheet } from "react-native";
+import { SafeAreaView, Platform, Pressable } from "react-native";
 import styles from "../assets/utils/styles.js";
 import ModalGroup from "../components/ModalGroup.js";
 import Profile from "../components/Profile.js";
@@ -16,18 +16,13 @@ import {
   FabIcon,
   EditIcon, 
   AvatarFallbackText,
-  ScrollView,
-  Input,
-  Button,
-  ButtonText,
-  ButtonIcon
+  ScrollView
 } from "@gluestack-ui/themed";
 import socket from "../assets/utils/socket.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import EverIcon from "../assets/logo512.png";
 
-const Main = ({ navigation }) => {
-  /*const [username, setUsername] = useState("");
+const Chat = ({ navigation }) => {
+  const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState([]);
@@ -134,58 +129,8 @@ const Main = ({ navigation }) => {
       {visible ? <ModalGroup setVisible={setVisible}/> : ""}
       {visibleModalLogOut ? <ModalLogOut setVisible={setVisibleModalLogOut} navigation={navigation}/> : ""}
     </SafeAreaView>
-  )*/
-
-  const username = "César Villegas";
-  const [visibleModalLogOut, setVisibleModalLogOut] = useState(false);
-
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <Box 
-        height="10%"
-        mt={Platform.OS === "android" && "4%"} 
-        style={{alignItems: "center", width: "100%", backgroundColor: "blue"}}
-      >
-        <HStack 
-          flexDirection="row"
-          width="95%"
-          mt = {Platform.OS === "ios" && "1%"}
-          style={{
-            justifyContent: "space-around", 
-            alignItems: "center"
-          }}
-        >
-          <Profile 
-            username={username} 
-            setVisibleModalLogOut={setVisibleModalLogOut} 
-          />
-          <Input></Input>
-          <Button style = {mainStyles.everizonButton}>
-            <Image source={EverIcon} style = {mainStyles.everizonButton} />
-          </Button>
-        </HStack>
-      </Box>
-      <Box>
-
-      </Box>
-      <Box>
-
-      </Box>
-    </SafeAreaView>
   )
-
 } 
 
-const mainStyles = StyleSheet.create({
-  everizonButton : {
-    backgroundColor: "transparent",
-  },
-  everizonButtonImage : {
-    marginTop: 20,
-    width: "10%",
-    height: "10%",
-  }
-});
-
-export default Main;
+export default Chat;
 

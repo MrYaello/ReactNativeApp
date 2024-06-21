@@ -16,11 +16,11 @@ const Welcome = ({ navigation }) => {
   const [username, setUsername] = useState("");
 
   const goToLogin = () => {
-    navigation.replace("Login");
+    navigation.navigate("Login");
   }
 
   const goToRegister = () => {
-    navigation.replace("Register");
+    navigation.navigate("Register");
   }
   
   const getUsername = async () => {

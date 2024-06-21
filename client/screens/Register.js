@@ -66,7 +66,7 @@ const Register = ({ navigation }) => {
   }, [isActive, time]);
 
   const handleRegister = () => {
-    if (!password) setMessagePassword("Obligaroy field.");
+    if (!password) setMessagePassword("Obligatory field.");
     if (!phonenumber) setMessagePhonenumber("Obligatory field.");
     else if (phonenumber.length < 10) setMessagePhonenumber("Type a valid phonenumber.")
     if (!username) setMessageUsername("Obligaroy field.");
@@ -119,197 +119,198 @@ const Register = ({ navigation }) => {
         width: "100%",
         height: "100%"
       }}>
-      <Box width="80%">
-        <Text style={{
-          fontSize: 26,
-          paddingTop: 10,
-          marginBottom: 10,
-          alignSelf: "center"
-        }}>Register </Text>
-        <FormControl
-          size="lg"
-          isDisabled={emailVerified}
-          isInvalid={messageEmail}
-          isReadOnly={false}
-          isRequiered={true}
-        >
-          <FormControlLabel mb="$1">
-            <FormControlLabelText color={emailVerified ? "$primary600" : "$black"}>{emailVerified ? "Email Verified" : "Email"}</FormControlLabelText>
-          </FormControlLabel>
-          <Box flexDirection="row">
-          <Input width={emailVerified ? "100%" : "72%"}>
-            <InputField 
-              autoCorrect={false}
-              autoCapitalize="none"
-              size="sm"
-              type="text" 
-              defaultValue=""
-              placeholder="Where could we email you?"
-              onChangeText={(value) => {
-                setEmail(value.trim());
-                setMessageEmail("");
-              }}  
-            />
-          </Input>
-          
-          {!emailVerified ? <Button width="27%" ml="1%" flexDirection="row" justifyContent="center" onPress={verifyEmail} isDisabled={isActive}>
-            <ButtonText style={{
-              fontSize: 14,
-            }}>{buttonCooldown}</ButtonText>
-            <ButtonIcon ml="$2" as={CheckIcon}/>
-          </Button> : "" }
-          </Box>
-          <FormControlError>
-            <FormControlErrorIcon as={AlertCircleIcon}/>
-            <FormControlErrorText>{messageEmail}</FormControlErrorText>
-            {messageEmail=="Credentials already registered." ? <Button variant="link" style={{height: 22}} onPress={() => navigation.navigate("Login")}><ButtonText>Login?</ButtonText></Button> : ""}
-          </FormControlError>
-        </FormControl>
-        
-        <FormControl
-          size="lg"
-          isDisabled={!emailVerified}
-          isInvalid={messagePhonenumber}
-          isReadOnly={false}
-          isRequiered={true}
-        >
-          <FormControlLabel mb="$1">
-            <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Phone number</FormControlLabelText>
-          </FormControlLabel>
-          <Input>
-            <InputField 
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="number-pad"
-              type="text" 
-              defaultValue="" 
-              placeholder="Where should we call you?"
-              size="sm"
-              onChangeText={(value) => {
-                setPhonenumber(value.trim());
-                setMessagePhonenumber("");
-              }}  
-            />
-          </Input>
-          <FormControlError>
-            <FormControlErrorIcon as={AlertCircleIcon}/>
-            <FormControlErrorText>{messagePhonenumber}</FormControlErrorText>
-          </FormControlError>
-        </FormControl>
-
-        <FormControl
-          size="lg"
-          isDisabled={!emailVerified}
-          isInvalid={messageUsername}
-          isReadOnly={false}
-          isRequiered={true}
-        >
-          <FormControlLabel mb="$1">
-            <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Username</FormControlLabelText>
-          </FormControlLabel>
-          <Input>
-            <InputField 
-              autoCorrect={false}
-              autoCapitalize="none"
-              type="text" 
-              defaultValue="" 
-              placeholder="Choose your alter ego"
-              size="sm"
-              onChangeText={(value) => {
-                setUsername(value.trim());
-                setMessageUsername("");
-              }}  
-            />
-          </Input>
-          <FormControlError>
-            <FormControlErrorIcon as={AlertCircleIcon}/>
-            <FormControlErrorText>{messageUsername}</FormControlErrorText>
-          </FormControlError>
-        </FormControl>
-
-        <FormControl
-          size="lg"
-          isDisabled={!emailVerified}
-          isInvalid={messagePassword}
-          isReadOnly={false}
-          isRequiered={true}
-        >
-          <FormControlLabel mb="$1">
-            <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Password</FormControlLabelText>
-          </FormControlLabel>
-          <Box flexDirection="row">
-            <Input width="84%" mr="2%">
+        <Box width="80%">
+          <Text style={{
+            fontSize: 26,
+            paddingTop: 10,
+            marginBottom: 10,
+            alignSelf: "center"
+          }}>Register</Text>
+          <FormControl
+            size="lg"
+            isDisabled={emailVerified}
+            isInvalid={messageEmail}
+            isReadOnly={false}
+            isRequired={true}
+          >
+            <FormControlLabel mb="$1">
+              <FormControlLabelText color={emailVerified ? "$primary600" : "$black"}>{emailVerified ? "Email Verified" : "Email"}</FormControlLabelText>
+            </FormControlLabel>
+            <Box flexDirection="row">
+            <Input width={emailVerified ? "100%" : "72%"}>
               <InputField 
                 autoCorrect={false}
-                autoCapitalize="none" 
-                type={showPassword ? "input" : "password"} 
-                defaultValue="" 
+                autoCapitalize="none"
                 size="sm"
-                placeholder="Forge the key to your digital realm"
+                type="text" 
+                defaultValue=""
+                placeholder="Where could we email you?"
+                keyboardType="email-address"
                 onChangeText={(value) => {
-                  setPassword(value.trim());
-                  setMessagePassword("");
+                  setEmail(value.trim());
+                  setMessageEmail("");
                 }}  
               />
             </Input>
-            <Button variant="outline" width="14%" justifyContent="center" flexDirection="row" onPress={() => {setShowPassword(!showPassword)}} isDisabled={!emailVerified}>
-              {showPassword ? (
-                <ButtonIcon ml="0" as={EyeIcon}/>
-              ) : (
-                <Icon ml="0" as={EyeOffIcon} color="$primary600"/>            
-              )}
-            </Button>
             
-            
-          </Box>
+            {!emailVerified ? <Button width="27%" ml="1%" flexDirection="row" justifyContent="center" onPress={verifyEmail} isDisabled={isActive}>
+              <ButtonText style={{
+                fontSize: 14,
+              }}>{buttonCooldown}</ButtonText>
+              <ButtonIcon ml="$2" as={CheckIcon}/>
+            </Button> : null }
+            </Box>
+            <FormControlError>
+              <FormControlErrorIcon as={AlertCircleIcon}/>
+              <FormControlErrorText>{messageEmail}</FormControlErrorText>
+              {messageEmail==="Credentials already registered." ? <Button variant="link" style={{height: 22}} onPress={() => navigation.navigate("Login")}><ButtonText>Login?</ButtonText></Button> : null}
+            </FormControlError>
+          </FormControl>
           
-          <FormControlError>
-            <FormControlErrorIcon as={AlertCircleIcon}/>
-            <FormControlErrorText>{messagePassword}</FormControlErrorText>
-          </FormControlError>
-        </FormControl>
-        <FormControl 
-          mt="$2"
-        >
-          <Button 
-            flexDirection="row"
-            justifyContent="space-between"
+          <FormControl
+            size="lg"
             isDisabled={!emailVerified}
-            onPress={handleRegister}
+            isInvalid={messagePhonenumber}
+            isReadOnly={false}
+            isRequired={true}
           >
-            <ButtonText 
-              fontSize="$sm" 
-              fontWeight="$medium">
-              Start the odyssey
-            </ButtonText>
-            <ButtonIcon as={ArrowRightIcon}/>
-          </Button>
-        </FormControl>
-        <Box flexDirection="row" pt="$1">
-          <Button variant="link" p="$0" size="sm" onPress={() => {
-            navigation.navigate("Welcome")
-          }}>
-            <ButtonIcon size="md" mr="$1" as={ArrowLeftIcon} />
-            <ButtonText>Back to main</ButtonText>
-          </Button>
+            <FormControlLabel mb="$1">
+              <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Phone number</FormControlLabelText>
+            </FormControlLabel>
+            <Input>
+              <InputField 
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="phone-pad"
+                type="text" 
+                defaultValue="" 
+                placeholder="Where should we call you?"
+                size="sm"
+                onChangeText={(value) => {
+                  setPhonenumber(value.trim());
+                  setMessagePhonenumber("");
+                }}  
+              />
+            </Input>
+            <FormControlError>
+              <FormControlErrorIcon as={AlertCircleIcon}/>
+              <FormControlErrorText>{messagePhonenumber}</FormControlErrorText>
+            </FormControlError>
+          </FormControl>
+
+          <FormControl
+            size="lg"
+            isDisabled={!emailVerified}
+            isInvalid={messageUsername}
+            isReadOnly={false}
+            isRequired={true}
+          >
+            <FormControlLabel mb="$1">
+              <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Username</FormControlLabelText>
+            </FormControlLabel>
+            <Input>
+              <InputField 
+                autoCorrect={false}
+                autoCapitalize="none"
+                type="text" 
+                defaultValue="" 
+                placeholder="Choose your alter ego"
+                size="sm"
+                onChangeText={(value) => {
+                  setUsername(value.trim());
+                  setMessageUsername("");
+                }}  
+              />
+            </Input>
+            <FormControlError>
+              <FormControlErrorIcon as={AlertCircleIcon}/>
+              <FormControlErrorText>{messageUsername}</FormControlErrorText>
+            </FormControlError>
+          </FormControl>
+
+          <FormControl
+            size="lg"
+            isDisabled={!emailVerified}
+            isInvalid={messagePassword}
+            isReadOnly={false}
+            isRequired={true}
+          >
+            <FormControlLabel mb="$1">
+              <FormControlLabelText color={!emailVerified ? "$textLight400" : "$black"}>Password</FormControlLabelText>
+            </FormControlLabel>
+            <Box flexDirection="row">
+              <Input width="84%" mr="2%">
+                <InputField 
+                  autoCorrect={false}
+                  autoCapitalize="none" 
+                  type={showPassword ? "input" : "password"} 
+                  defaultValue="" 
+                  size="sm"
+                  placeholder="Forge the key to your digital realm"
+                  onChangeText={(value) => {
+                    setPassword(value.trim());
+                    setMessagePassword("");
+                  }}  
+                />
+              </Input>
+              <Button variant="outline" width="14%" justifyContent="center" flexDirection="row" onPress={() => {setShowPassword(!showPassword)}} isDisabled={!emailVerified}>
+                {showPassword ? (
+                  <ButtonIcon ml="0" as={EyeIcon}/>
+                ) : (
+                  <Icon ml="0" as={EyeOffIcon} color="$primary600"/>            
+                )}
+              </Button>
+              
+              
+            </Box>
+            
+            <FormControlError>
+              <FormControlErrorIcon as={AlertCircleIcon}/>
+              <FormControlErrorText>{messagePassword}</FormControlErrorText>
+            </FormControlError>
+          </FormControl>
+          <FormControl 
+            mt="$2"
+          >
+            <Button 
+              flexDirection="row"
+              justifyContent="space-between"
+              isDisabled={!emailVerified}
+              onPress={handleRegister}
+            >
+              <ButtonText 
+                fontSize="$sm" 
+                fontWeight="$medium">
+                Start the odyssey
+              </ButtonText>
+              <ButtonIcon as={ArrowRightIcon}/>
+            </Button>
+          </FormControl>
+          <Box flexDirection="row" pt="$1">
+            <Button variant="link" p="$0" size="sm" onPress={() => {
+              navigation.navigate("Welcome")
+            }}>
+              <ButtonIcon size="md" mr="$1" as={ArrowLeftIcon} />
+              <ButtonText>Back to main</ButtonText>
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      <Box style={{
-        position: "absolute",
-        flex: 1,
-        height: "100%",
-        flexDirection: "column-reverse",
-        justifyContent: "flex-start"
-      }}>
-        <Image
-        alt= "YLCode Text Logo"
-        source={require('../assets/textlogo512.png')}
-        style={{
-          height: 50,
-          width: 330
-        }}
-        />
-      </Box>
+        <Box style={{
+          position: "absolute",
+          flex: 1,
+          height: "100%",
+          flexDirection: "column-reverse",
+          justifyContent: "flex-start"
+        }}>
+          <Image
+          alt= "YLCode Text Logo"
+          source={require('../assets/textlogo512.png')}
+          style={{
+            height: 50,
+            width: 330
+          }}
+          />
+        </Box>
       {visibleModalVerify ? <ModalVerification setVisible={setVisibleModalVerify} email={email} setEmailVerified={setEmailVerified}/> : ""}
     </SafeAreaView>
   )
