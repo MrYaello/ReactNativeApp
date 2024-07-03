@@ -20,7 +20,8 @@ import {
   Input,
   Button,
   ButtonText,
-  ButtonIcon
+  ButtonIcon,
+  InputField
 } from "@gluestack-ui/themed";
 import socket from "../assets/utils/socket.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -144,29 +145,36 @@ const Main = ({ navigation }) => {
       <Box 
         height="10%"
         mt={Platform.OS === "android" && "4%"} 
-        style={{alignItems: "center", width: "100%", backgroundColor: "blue"}}
+        style={{alignItems: "center", width: "100%"}}
       >
         <HStack 
           flexDirection="row"
           width="95%"
-          mt = {Platform.OS === "ios" && "1%"}
-          style={{
-            justifyContent: "space-around", 
-            alignItems: "center"
-          }}
+          mt = {Platform.OS === "ios" && "3%"}
+          style={mainStyles.hstack}
         >
           <Profile 
+            navigation={navigation}
             username={username} 
             setVisibleModalLogOut={setVisibleModalLogOut} 
           />
-          <Input></Input>
-          <Button style = {mainStyles.everizonButton}>
-            <Image source={EverIcon} style = {mainStyles.everizonButton} />
+          <Input 
+            style={mainStyles.searchInput}
+          >
+            <InputField 
+              placeholder="Search for an event..." 
+              style = {mainStyles.searchInputField}
+            />
+          </Input>
+          <Button style = {mainStyles.everizonButton} >
+            <Image source={EverIcon} style = {mainStyles.everizonButtonImage} />
           </Button>
         </HStack>
       </Box>
       <Box>
-
+        {/*<Button onPress={() => navigation.navigate("Account")}>
+          <ButtonText>Account</ButtonText>
+        </Button>*/}
       </Box>
       <Box>
 
@@ -177,13 +185,39 @@ const Main = ({ navigation }) => {
 } 
 
 const mainStyles = StyleSheet.create({
+  hstack: {
+    justifyContent: "space-between", 
+    alignItems: "stretch",
+    verticalAlign: "middle",
+    marginLeft: "1%"
+  },
+  searchInput : {
+    marginTop: "1%",
+    marginLeft: "16.5%",
+    marginBottom: "10%",
+    width: "60%",
+    height: "50%",
+    backgroundColor: "white",
+    borderRadius: 50,
+    backgroundColor: "#E0E0F0",
+    borderColor: "#FF0F57",
+  },
+  searchInputField : {
+    width: "100%",
+    height: "90%",
+    backgroundColor: "#E0E0F0",
+  },
   everizonButton : {
     backgroundColor: "transparent",
+    marginTop: "-2%",
+    borderRadius: 50,
+    width: "15%",
+    height: "85%",
+    alignItems: "center",
   },
   everizonButtonImage : {
-    marginTop: 20,
-    width: "10%",
-    height: "10%",
+    width: "250%",
+    height: "110%",
   }
 });
 
