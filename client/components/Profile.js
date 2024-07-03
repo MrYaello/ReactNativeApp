@@ -4,14 +4,14 @@ import { MenuIcon, Button, Icon, Avatar, AvatarFallbackText, AvatarImage, Text, 
     AddIcon, RemoveIcon, AccordionIcon, ChevronDownIcon, ChevronUpIcon} from "@gluestack-ui/themed";
 import socket from "../assets/utils/socket";
 import QRCode from "qrcode";
-import { ImageIcon, KeyRoundIcon } from 'lucide-react-native';
+import { ImageIcon, KeyRoundIcon, Navigation } from 'lucide-react-native';
 import { SvgXml } from 'react-native-svg';
 import { useState, useLayoutEffect } from "react";
 import { Platform, StyleSheet, Pressable } from "react-native";
 
-const Profile = ({username, setVisibleModalLogOut}) => {
-    const alias = "MrYaello";
-    username = "Yael Lozano Estrada"
+const Profile = ({navigation, username, setVisibleModalLogOut}) => {
+    const alias = "villegas_sg";
+    username = "César Ismael Villegas Maldonado"
     const [avatarSource, setAvatarSource] = useState();
     const [isExpanded, setIsExpanded] = useState(false);
     useLayoutEffect(() => {
@@ -40,7 +40,7 @@ const Profile = ({username, setVisibleModalLogOut}) => {
         }
       }
       
-    QRCode.toString('IMJOTO', opts, function (err, url) {
+    QRCode.toString('HELLO WORLD', opts, function (err, url) {
     if (err) console.log(err);
     qr = url;
     });
@@ -78,18 +78,24 @@ const Profile = ({username, setVisibleModalLogOut}) => {
                                                     <AvatarFallbackText>{username}</AvatarFallbackText>
                                                     <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
                                                 </Avatar>
-                                                <VStack alignItems="center" ml="$3">
-                                                <Box>
-                                                    <Text size="md">{alias}</Text>
-                                                </Box>
-                                                <Box>
-                                                    <Text size="xl">{username}</Text>
-                                                </Box>
+                                                <VStack alignItems="center" ml="$3" style={{maxWidth: "65%"}}>
+                                                    <Box>
+                                                        <Text size="md">{alias}</Text>
+                                                    </Box>
+                                                    {isExpanded ? (
+                                                        <Box>
+                                                            <Text size="xl">{username}</Text>
+                                                        </Box>
+                                                    ):(
+                                                        <Box>
+                                                            <Text size="xl" numberOfLines={1} ellipsizeMode="tail">{username}</Text>
+                                                        </Box>
+                                                    )}
                                                 </VStack>
                                                 {isExpanded ? (
-                                                    <Icon as={ChevronUpIcon} size="xl" ml="$4" color="$primary600"/>
+                                                    <Icon as={ChevronUpIcon} size="xl" ml="$4" color="#FF0F57"/>
                                                 ) : (
-                                                    <AccordionIcon as={ChevronDownIcon} size="xl" ml="$4" color="$primary600"/>   
+                                                    <AccordionIcon as={ChevronDownIcon} size="xl" ml="$4" color="#FF0F57"/>   
                                                 )}
                                             </HStack>
                                             </>
@@ -115,7 +121,14 @@ const Profile = ({username, setVisibleModalLogOut}) => {
                                 </AccordionTrigger>
                             </AccordionHeader>
                             <AccordionContent height="70%">
-                                <ActionsheetItem justifyContent="space-between">
+                                <ActionsheetItem 
+                                    justifyContent="space-between"
+                                    onPress={() => {
+                                            setShowActionsheet(!showActionsheet);
+                                            navigation.navigate("Account");
+                                        }
+                                    }
+                                >
                                     <VStack>
                                         <Text size="md">Account</Text>
                                         <Text color="$light400" size="sm">Change username, password, email.</Text>
