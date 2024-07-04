@@ -1,13 +1,12 @@
 import { Box, HStack, Text, VStack } from "@gluestack-ui/themed";
 import { StyleSheet } from "react-native";
 
-const ActionTile = ({name, description, children}) => {
+const ActionTile = ({name, children}) => {
     return (
         <Box style={styles.tile}>
             <HStack style={styles.tileHStack}>
                 <VStack style={styles.tileVStack}>
-                    <Text size="md">{name}</Text>
-                    <Text color="$light400" size="sm">{description}</Text>
+                    <Text size="lg">{name}</Text>
                 </VStack>
                 {children}
             </HStack>
@@ -18,7 +17,7 @@ const ActionTile = ({name, description, children}) => {
 const styles = StyleSheet.create({
     tile: {
         width: "100%",
-        maxHeight: "15%",
+        height: "7%",
     },
     tileHStack: {
         marginLeft: "2%",

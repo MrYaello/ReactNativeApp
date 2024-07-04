@@ -35,49 +35,73 @@ const Account = ({ navigation }) => {
             </Box>
             <Box style={accountScreenStyles.body}>
                 <VStack alignItems="center" width="100%" >
-                    <ActionTile name="Change name" description="Change your full name.">
+                    <ActionTile name="Change name">
                         <Button style={accountScreenStyles.editButton}>
-                            <ButtonText size="md" color="black" fontWeight="$semilight">Edit</ButtonText>
+                            <ButtonText size="md" color="black" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
                                 <GluestackIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change username" description="Alter your alter ego.">
+                    <ActionTile name="Change username">
                         <Button style={accountScreenStyles.editButton}>
-                            <ButtonText size="md" color="black" fontWeight="$semilight">Edit</ButtonText>
+                            <ButtonText size="md" color="black" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
                                 <GluestackIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change password" description="Change your password.">
+                    <ActionTile name="Change password">
                         <Button style={accountScreenStyles.editButton}>
-                            <ButtonText size="md" color="black" fontWeight="$semilight">Edit</ButtonText>
+                            <ButtonText size="md" color="black" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
                                 <GluestackIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change avatar" description="Change your profile picture.">
+                    <ActionTile name="Change avatar">
                         <Button style={accountScreenStyles.editButton}>
-                            <ButtonText size="md" color="black" fontWeight="$semilight">Edit</ButtonText>
+                            <ButtonText size="md" color="black" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
                                 <GluestackIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
 
-                    <Box style={accountScreenStyles.options}>
-                        <Text>Security</Text>
+                    <Box style={accountScreenStyles.securityBox}>
+                        <Button style={accountScreenStyles.securityButton}>
+                            <Box style={accountScreenStyles.securityBox2}>
+                                <Text 
+                                    style={accountScreenStyles.securityButtonText} 
+                                    size="lg"
+                                >
+                                    Security
+                                </Text>
+                            </Box>
+                        </Button>
                     </Box>
-                    <Box style={accountScreenStyles.options}>
-                        <Button onPress={() => navigation.replace("Login")}>
+
+                    <Box style={accountScreenStyles.voidBox}>
+                        <Button style={{backgroundColor: "transparent"}}></Button>
+                    </Box>
+
+                    <Box style={accountScreenStyles.logOutBox}>
+                        <Button 
+                            style={accountScreenStyles.logOutButton}
+                            onPress={() => navigation.replace("Login")}
+                        >
                             <ButtonText>Log out</ButtonText>
                         </Button>
                     </Box>
-                    <Box style={accountScreenStyles.options}>
-                        <Text>Delete Account</Text>
+                    <Box style={accountScreenStyles.deleteAccountBox}>
+                        <Button 
+                            style={accountScreenStyles.deleteAccountButton}
+                            onPress={() => navigation.replace("Welcome")}
+                        >
+                            <ButtonText
+                                style={accountScreenStyles.deleteAccountButtonText}    
+                            >Delete account</ButtonText>
+                        </Button>
                     </Box>
                 </VStack>
             </Box>
@@ -115,14 +139,57 @@ const accountScreenStyles = StyleSheet.create({
     },
     body: {
         marginTop: "1%", 
-        height: "100%"
+        height: "100%",
     },
     editButton: {
         width: "20%",
         height: "100%",
         backgroundColor: "transparent",
     },
-    
+    securityBox: {
+        width: "100%",
+        height: "5%",
+    },
+    securityButton: {
+        width: "100%",
+        backgroundColor: "transparent",
+    },
+    securityBox2: {
+        width: "100%",
+        justifyContent: "flex-start",
+    },
+    securityButtonText: {
+        backgroundColor: "transparent",
+    },
+    voidBox: {
+        height: "50%",
+    },
+    logOutBox: {
+        height: "6%",
+        width: "100%",
+        alignItems: "center",
+    },
+    logOutButton: {
+        width: "90%",
+        height: "100%",
+        borderRadius: 50
+    },
+    deleteAccountBox: {
+        height: "6%",
+        width: "100%",
+        alignItems: "center",
+    },
+    deleteAccountButton: {
+        width: "90%",
+        height: "100%",
+        backgroundColor: "transparent",
+        borderColor: "grey",
+        borderWidth: 1,
+        borderRadius: 50
+    },
+    deleteAccountButtonText: {
+        color: "red",
+    }
 })
 
 export default Account;
