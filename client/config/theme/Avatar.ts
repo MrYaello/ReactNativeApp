@@ -5,7 +5,7 @@ export const Avatar = createStyle({
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
-  bg: '$primary600',
+  bg: '#FF0F57',
   variants: {
     size: {
       'xs': {
@@ -113,6 +113,24 @@ export const Avatar = createStyle({
 
         _text: {
           props: { size: '5xl' },
+        },
+      },
+
+      '3xl': {
+        w: '$48',
+        h: '$48',
+
+        _badge: {
+          w: '$12',
+          h: '$12',
+        },
+        _image: {
+          w: '$full',
+          h: '$full',
+        },
+
+        _text: {
+          props: { size: '6xl' },
         },
       },
     },

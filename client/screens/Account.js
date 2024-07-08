@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { VStack, HStack, Box, Button, ButtonIcon, Text, ChevronsLeftIcon, SafeAreaView, 
     ButtonText, Heading, Pressable, Actionsheet, ActionsheetBackdrop, ActionsheetContent, 
     ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, ActionsheetItem, Avatar, 
-    AvatarFallbackText, AvatarImage} from "@gluestack-ui/themed";
+    AvatarFallbackText, AvatarImage, AvatarBadge} from "@gluestack-ui/themed";
 import { StyleSheet } from "react-native";
-import GluestackIcon from "../assets/icons/EditIcon";
+import EditIcon from "../assets/icons/EditIcon";
+import InversedEditIcon from "../assets/icons/InversedEditIcon";
 import ActionTile from "../components/ActionTile";
 
 const Account = ({ navigation }) => {
@@ -12,7 +13,8 @@ const Account = ({ navigation }) => {
     const [avatarSource, setAvatarSource] = useState();
     const [showActionsheet, setShowActionsheet] = useState(false);
     const handleClose = () => setShowActionsheet(!showActionsheet);
-    username = "César Ismael Villegas Maldonado";
+    username = "villegassg";
+    name = "César Ismael Villegas Maldonado";
 
     return (
         <SafeAreaView>
@@ -47,7 +49,7 @@ const Account = ({ navigation }) => {
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
-                                <GluestackIcon color="#FF0F57" size="xl"/>
+                                <EditIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
@@ -55,7 +57,7 @@ const Account = ({ navigation }) => {
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
-                                <GluestackIcon color="#FF0F57" size="xl"/>
+                                <EditIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
@@ -63,7 +65,7 @@ const Account = ({ navigation }) => {
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
-                                <GluestackIcon color="#FF0F57" size="xl"/>
+                                <EditIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
@@ -74,7 +76,7 @@ const Account = ({ navigation }) => {
                         >
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
-                                <GluestackIcon color="#FF0F57" size="xl"/>
+                                <EditIcon color="#FF0F57" size="xl"/>
                             </ButtonIcon>
                         </Button>
 
@@ -86,24 +88,51 @@ const Account = ({ navigation }) => {
                                 <ActionsheetDragIndicatorWrapper>
                                     <ActionsheetDragIndicator />
                                 </ActionsheetDragIndicatorWrapper>
-                                <ActionsheetItem>
-                                    <Box>
-                                        <Button style={{backgroundColor: "blue"}}></Button>
+
+                                <ActionsheetItem style={{height: "0%"}}>
+                                    <Box style={accountScreenStyles.editAvatarVoidBox}>
+                                        <Button style={{backgroundColor: "transparent"}}></Button>
                                     </Box>
                                 </ActionsheetItem>
 
                                 <ActionsheetItem
                                     style= {accountScreenStyles.avatarSheetContent}
                                 >
-                                    <Avatar size="2xl">
-                                        <AvatarFallbackText>{username}</AvatarFallbackText>
-                                        <AvatarImage alt={`${username} Avatar`} source={{uri: `${avatarSource}`}}/>
+                                    <Text size="3xl" color="black" style={{fontWeight: 600}}>Change avatar</Text>
+                                </ActionsheetItem>
+
+                                <ActionsheetItem
+                                    style= {accountScreenStyles.avatarSheetContent}
+                                >
+                                    <Avatar size='3xl'>
+                                        <AvatarFallbackText>{name}</AvatarFallbackText>
+                                        <AvatarImage alt={`${name} Avatar`} source={{uri: `${avatarSource}`}}/>
+                                        <AvatarBadge bg="transparent">
+                                            <Button 
+                                                bg="white" 
+                                                size="2xl" 
+                                                borderRadius='$full' 
+                                                style={accountScreenStyles.editAvatarButton}
+                                                onPress={()=> console.log("Avatar button pressed!")} 
+                                            >
+                                                <ButtonIcon as={InversedEditIcon} color="#FF0F57" size="2xl"/>
+                                            </Button>
+                                        </AvatarBadge>
                                     </Avatar>
                                 </ActionsheetItem>
 
+                                <ActionsheetItem
+                                    style= {accountScreenStyles.avatarSheetContent}
+                                >
+                                    <VStack style={{alignItems: "center"}}>
+                                        <Text size="2xl" color="black" style={{fontWeight: "normal"}}>{name}</Text>
+                                        <Text size="lg" color="grey" style={{fontWeight: "semilight"}}>@{username}</Text>
+                                    </VStack>
+                                </ActionsheetItem>
+
                                 <ActionsheetItem>
-                                    <Box>
-                                        <Button style={{backgroundColor: "blue"}}></Button>
+                                    <Box style={accountScreenStyles.editAvatarVoidBox}>
+                                        <Button style={{backgroundColor: "transparent"}}></Button>
                                     </Box>
                                 </ActionsheetItem>
                             </ActionsheetContent>
@@ -236,6 +265,15 @@ const accountScreenStyles = StyleSheet.create({
     },
     deleteAccountButtonText: {
         color: "red",
+    },
+    editAvatarButton: {
+        width: "100%", 
+        height: "100%"
+    },
+    editAvatarVoidBox: {
+        backgroundColor: "transparent", 
+        width: "100%", 
+        height: "100%"
     }
 })
 
