@@ -6,6 +6,7 @@ import Main from "./screens/Main";
 import Register from './screens/Register';
 import Welcome from './screens/Welcome';
 import Account from './screens/Account';
+import Settings from './screens/Settings';
 
 import { config } from './config/gluestack-ui.config';
 import { NavigationContainer } from '@react-navigation/native';
@@ -65,6 +66,14 @@ export default function App() {
             <Stack.Screen
               name='Account'
               component={Account}
+              options={{
+                headerShown: false
+              }}
+            />
+
+            <Stack.Screen
+              name='Settings'
+              component={Settings}
               options={{
                 headerShown: false
               }}

@@ -7,7 +7,7 @@ export const Switch = createStyle({
 
     // hacky fix for the above
     //@ts-ignore
-    trackColor: { false: '$backgroundLight300', true: '$primary600' },
+    trackColor: { false: '$backgroundLight300', true: '$#FF0F57' },
     thumbColor: '$backgroundLight0',
     //@ts-ignore
     activeThumbColor: '$backgroundLight0',

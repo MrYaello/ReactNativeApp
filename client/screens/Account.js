@@ -45,7 +45,7 @@ const Account = ({ navigation }) => {
             </Box>
             <Box style={accountScreenStyles.body}>
                 <VStack alignItems="center" width="100%" >
-                    <ActionTile name="Change name">
+                    <ActionTile name="Change name" size="lg">
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
@@ -53,7 +53,7 @@ const Account = ({ navigation }) => {
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change username">
+                    <ActionTile name="Change username" size="lg">
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
@@ -61,7 +61,7 @@ const Account = ({ navigation }) => {
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change password">
+                    <ActionTile name="Change password" size="lg">
                         <Button style={accountScreenStyles.editButton}>
                             <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
                             <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
@@ -69,7 +69,7 @@ const Account = ({ navigation }) => {
                             </ButtonIcon>
                         </Button>
                     </ActionTile>
-                    <ActionTile name="Change avatar">
+                    <ActionTile name="Change avatar" size="lg">
                         <Button 
                             style={accountScreenStyles.editButton}
                             onPress={() => handleClose()}
@@ -89,7 +89,7 @@ const Account = ({ navigation }) => {
                                     <ActionsheetDragIndicator />
                                 </ActionsheetDragIndicatorWrapper>
 
-                                <ActionsheetItem style={{height: "0%"}}>
+                                <ActionsheetItem style={{height: "0%", backgroundColor: "transparent"}}>
                                     <Box style={accountScreenStyles.editAvatarVoidBox}>
                                         <Button style={{backgroundColor: "transparent"}}></Button>
                                     </Box>
@@ -130,7 +130,7 @@ const Account = ({ navigation }) => {
                                     </VStack>
                                 </ActionsheetItem>
 
-                                <ActionsheetItem>
+                                <ActionsheetItem style={{backgroundColor: "transparent"}}>
                                     <Box style={accountScreenStyles.editAvatarVoidBox}>
                                         <Button style={{backgroundColor: "transparent"}}></Button>
                                     </Box>
@@ -138,6 +138,37 @@ const Account = ({ navigation }) => {
                             </ActionsheetContent>
                         </Actionsheet>
                     </ActionTile>
+
+                    <ActionTile name="Change email" size="lg">
+                        <Button style={accountScreenStyles.editButton}>
+                            <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
+                            <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
+                                <EditIcon color="#FF0F57" size="xl"/>
+                            </ButtonIcon>
+                        </Button>
+                    </ActionTile>
+
+                    <ActionTile name="Change phone number" size="lg">
+                        <Button style={accountScreenStyles.editButton}>
+                            <ButtonText size="md" color="#FF0F57" fontWeight="$normal">Edit</ButtonText>
+                            <ButtonIcon style={{marginLeft: "20%", marginBottom: "10%"}}>
+                                <EditIcon color="#FF0F57" size="xl"/>
+                            </ButtonIcon>
+                        </Button>
+                    </ActionTile>
+
+                    <Box style={accountScreenStyles.securityBox}>
+                        <Button style={accountScreenStyles.securityButton}>
+                            <Box style={accountScreenStyles.securityBox2}>
+                                <Text 
+                                    style={accountScreenStyles.securityButtonText} 
+                                    size="lg"
+                                >
+                                    Information
+                                </Text>
+                            </Box>
+                        </Button>
+                    </Box>
 
                     <Box style={accountScreenStyles.securityBox}>
                         <Button style={accountScreenStyles.securityButton}>
@@ -209,7 +240,6 @@ const accountScreenStyles = StyleSheet.create({
         fontWeight: "semibold",
     },
     body: {
-        marginTop: "1%", 
         height: "100%",
     },
     editButton: {
@@ -220,6 +250,7 @@ const accountScreenStyles = StyleSheet.create({
     avatarSheetContent: {
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "white",
     },
     securityBox: {
         width: "100%",
@@ -237,7 +268,7 @@ const accountScreenStyles = StyleSheet.create({
         backgroundColor: "transparent",
     },
     voidBox: {
-        height: "49%",
+        height: "36.5%",
     },
     logOutBox: {
         height: "6%",

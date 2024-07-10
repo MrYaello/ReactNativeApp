@@ -172,9 +172,9 @@ const Main = ({ navigation }) => {
         </HStack>
       </Box>
       <Box>
-        {/*<Button onPress={() => navigation.navigate("Account")}>
-          <ButtonText>Account</ButtonText>
-        </Button>*/}
+        <Button onPress={() => navigation.navigate("Settings")}>
+          <ButtonText>Settings</ButtonText>
+        </Button>
       </Box>
       <Box>
 
