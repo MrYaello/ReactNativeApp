@@ -4,9 +4,16 @@ import { Box, Button, ButtonIcon, ButtonText, ChevronsLeftIcon, Heading, HStack,
     ScrollView, Select, SelectTrigger, SelectInput, SelectPortal, SelectBackdrop, SelectContent, 
     SelectDragIndicatorWrapper, SelectDragIndicator, SelectItem, Switch, Text, VStack} from '@gluestack-ui/themed';
 import ActionTile from '../components/ActionTile';
+import { useLanguage } from '../assets/Languages/LanguageContext';
 
 const Settings = ({ navigation }) => {
 
+    const { language, changeLanguage, translations } = useLanguage();
+    const translator = translations[language].settings;
+
+    const handleLanguageChange = (val) => {
+        changeLanguage(val);
+    };
 
     return (
         <SafeAreaView style={settingsScreenStyles.safeArea}>
@@ -25,7 +32,12 @@ const Settings = ({ navigation }) => {
                             size="xxl"
                         />
                     </Button>
-                    <Heading size="2xl" style={settingsScreenStyles.heading}>Settings</Heading>
+                    <Heading 
+                        size="2xl" 
+                        style={settingsScreenStyles.heading}
+                    >
+                        {translator.title}
+                    </Heading>
                     <Button 
                         style={{
                             backgroundColor: "transparent", 
@@ -45,9 +57,13 @@ const Settings = ({ navigation }) => {
                             bg="$secondary100"
                             style={{paddingLeft: "5%", marginBottom: "1%"}}
                         >
-                            Appearance
+                            {translator.appearance}
                         </Text>
-                        <ActionTile name="Dark Mode" size="xl" fontWeight="$normal">
+                        <ActionTile 
+                            name={translator.darkMode} 
+                            size="xl" 
+                            fontWeight="$normal"
+                        >
                             <Switch />
                         </ActionTile>
                     </VStack>
@@ -61,11 +77,14 @@ const Settings = ({ navigation }) => {
                             bg="$secondary100"
                             style={{paddingLeft: "5%", marginBottom: "1%"}}
                         >
-                            Language
+                            {translator.language}
                         </Text>
-                        <Select>
+                        <Select 
+                            onValueChange={handleLanguageChange}
+                            style={{paddingLeft: "5%"}}
+                        >
                             <SelectTrigger size="lg">
-                                <SelectInput placeholder="Select option" />
+                                <SelectInput placeholder="Select language" size="2xl"/>
                             </SelectTrigger>
                             <SelectPortal>
                                 <SelectBackdrop />
@@ -73,8 +92,8 @@ const Settings = ({ navigation }) => {
                                     <SelectDragIndicatorWrapper>
                                         <SelectDragIndicator />
                                     </SelectDragIndicatorWrapper>
-                                    <SelectItem value="en" label="Current device language" />
-                                    <SelectItem value="en" label="Spanish" />
+                                    <SelectItem value="device" label="Current device language" />
+                                    <SelectItem value="es" label="Spanish" />
                                     <SelectItem value="en" label="English" />
                                 </SelectContent>
                             </SelectPortal>
