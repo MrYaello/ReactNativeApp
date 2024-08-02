@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "version": "node -v"
   },
   "dependencies": {
     "@expo/html-elements": "latest",
@@ -21,6 +22,7 @@
     "expo-camera": "~15.0.14",
     "expo-status-bar": "~1.12.1",
     "lucide-react-native": "^0.408.0",
+    "node": "22.5.1",
     "qrcode": "^1.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
